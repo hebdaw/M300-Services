@@ -1,0 +1,17 @@
+--- 
+services: # Specifies the services in this File
+  content-service: 
+    build: ./content
+    ports: 
+      - "5001:80"
+    volumes: 
+      - "./content:/usr/src/app"
+  main-page: 
+    depends_on: 
+      - content-service
+    image: "php:apache"
+    ports: 
+      - "5000:80"
+    volumes: 
+      - "./main-page:/var/www/html"
+version: "3" # Specifies version of the YML-File
